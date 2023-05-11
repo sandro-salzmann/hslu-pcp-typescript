@@ -1,0 +1,11 @@
+{
+  "name": "hslu-pcp-typescript",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "tsc"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.0.4"
+  }
+}
