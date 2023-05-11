@@ -118,8 +118,6 @@
     // Limit: Klassen können nicht mit Klassen (oder Variablen) gemerged werden. (=> Mixins mimicked class merging.)
 
 // Global augmentation: Man kann den globalen scope augmentieren / patchen.
-
-    // observable.ts
     declare global {
       interface Array<T> {
         returnTrue(): boolean;
@@ -132,20 +130,19 @@
     export {};
 
 // Module Augmentation: Javascript Module können nicht gemerged werden, aber man kann existierende Objekte "patchen":
-
     // observable.ts
-    // export class Observable<T> {}
+        // export class Observable<T> {}
     // map.ts
-    // import { Observable } from "./observable";
-    // declare module "./observable" {
-    //   interface Observable<T> {
-    //     map<U>(f: (x: T) => U): Observable<U>;
-    //   }
-    // }
-    // Observable.prototype.map = function (f) {
-    // };
-    // // consumer.ts
-    // import { Observable } from "./observable";
-    // import "./map";
-    // let o: Observable<number>;
-    // o.map((x) => x.toFixed());
+        // import { Observable } from "./observable";
+        // declare module "./observable" {
+        //   interface Observable<T> {
+        //     map<U>(f: (x: T) => U): Observable<U>;
+        //   }
+        // }
+        // Observable.prototype.map = function (f) {
+        // };
+    // consumer.ts
+        // import { Observable } from "./observable";
+        // import "./map";
+        // let o: Observable<number>;
+        // o.map((x) => x.toFixed());
