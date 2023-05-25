@@ -5,29 +5,35 @@
 //             Die gemergte Definition hat alle Features beider original Deklarationen.
 
 // Interface + Interface: Gemergte Interfaces besitzen alle members beider Deklarationen.
-    interface Box {
+    interface Box1 {
       height: number;
       width: number;
     }
-    interface Box {
+    interface Box1 {
       scale: number;
     }
     // Merged zu
-    // interface Box {
+    // interface Box1 {
     //   scale: number;
     //   height: number;
     //   width: number;
     // }
+    const myBox1: Box1 = { height: 1, scale: 1, width: 1}
+    console.log({ myBox1 })
+    
     // Regel 1: Non-Function members müssen entweder unique (unterschiedlicher Name) oder vom gleichen Typ (falls gleicher Name) sein.
-    interface Box {
+    interface Box2 {
       x: number;
     }
-    interface Box {
+    interface Box2 {
       x: number; // ok
+      y: number;
     }
-    interface Box {
-      // x: string; // nicht ok
+    interface Box2 {
+      // x: string; // Fehler: Subsequent property declarations must have the same type.  Property 'x' must be of type 'number', but here has type 'string'.
     } 
+    const myBox2: Box2 = { x: 1, y: 1 }
+    console.log({ myBox2 })
     // Regel 2: Function members müssen nicht unique sein => die Funktionen werden überladen.
     //          Beim Überladen gibt es 2 Regeln:
     //            Regel 1: Später deklarierte Interfaces haben eine höhere Präzedenz / haben Vorrang.
@@ -51,6 +57,8 @@
     //   export class Zebra {}
     //   export class Dog {}
     // }
+    const myLeggedAnimal: Animals.Legged = { numberOfLegs: 4 }
+    console.log({ myLeggedAnimal });
 
     // Achtung: Nur exportete Member werden gemerged! Nicht exportete Members sind nur im originalen nicht-merged namespace ersichtlich.
     namespace Animal {
@@ -77,6 +85,7 @@
     }
     const label: Album.AlbumLabel = { tracks: 2 };
     const album: Album = { label: label };
+    console.log({ album })
 
 // Funktion + Namespace: Funktionen können extended werden indem properties zur Funktion hinzugefügt werden
 
@@ -90,9 +99,10 @@
       return buildLabel.prefix + name + buildLabel.suffix;
     }
     namespace buildLabel {
-      export let suffix = "";
+      export let suffix = "!";
       export let prefix = "Hello, ";
     }
+    console.log({ 'buildLabel("John Doe")': buildLabel("John Doe") })
 
 // Enum + Namespace: Enums können mit statischen members erweitert werden
     enum Color {
@@ -113,7 +123,7 @@
         }
       }
     }
-    console.log(Color.mixColor("cyan"));
+    console.log({ 'Color.mixColor("cyan")': Color.mixColor("cyan") });
 
     // Limit: Klassen können nicht mit Klassen (oder Variablen) gemerged werden. (=> Mixins mimicked class merging.)
 
@@ -126,7 +136,7 @@
     Array.prototype.returnTrue = function () {
       return true;
     };
-    const trueValue = [].returnTrue();
+    console.log({ "[]].returnTrue()": [].returnTrue() });
     export {};
 
 // Module Augmentation: Javascript Module können nicht gemerged werden, aber man kann existierende Objekte "patchen":
@@ -139,8 +149,7 @@
         //     map<U>(f: (x: T) => U): Observable<U>;
         //   }
         // }
-        // Observable.prototype.map = function (f) {
-        // };
+        // Observable.prototype.map = function (f) {}
     // consumer.ts
         // import { Observable } from "./observable";
         // import "./map";
