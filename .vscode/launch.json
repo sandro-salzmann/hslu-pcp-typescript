@@ -7,11 +7,13 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Launch Program",
+      "name": "Launch current file",
       "skipFiles": ["<node_internals>/**"],
-      "program": "${workspaceFolder}\\helloworld.ts",
+      "program": "${file}",
       "preLaunchTask": "tsc: build - tsconfig.json",
-      "outFiles": ["${workspaceFolder}/build/**/*.js"]
+      "outFiles": ["${workspaceFolder}/build/**/*.js"],
+      "outputCapture": "std",
+      "console": "integratedTerminal"
     }
   ]
 }
