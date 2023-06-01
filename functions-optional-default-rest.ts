@@ -4,6 +4,7 @@
 // Funktionen können eine variable Anzahl an Argumente entgegennehmen.
 function f(x?: number) {
   // x hat den Typ "number | undefined". Undefined dabei, weil unspezifizierte Parameter den Wert "undefined" bekommen
+  console.log(x);
 }
 f(); // OK
 f(10); // OK
@@ -19,6 +20,7 @@ function f2(y: number, x?: number){}; // compiled
 // Optionalen Parameter können default Werte zugewiesen werden.
 function f4(x = 10) {
   // x hat den Typ "number", weil falls x undefined ist wird es durch 10 ersetzt
+  console.log(x);
 }
 f4(); // OK
 f4(10); // OK
@@ -30,6 +32,7 @@ f4(10); // OK
 // Funktionen können eine unbounded Anzahl Argumente entgegennehmen mit rest Parametern.
 // Ein rest Parameter muss nach allen anderen Parametern stehen.
 function multiply(n: number, ...m: number[]) {
+  console.log(m);
   return m.map((x) => n * x);
 }
 // 'a' gets value [10, 20, 30, 40]
@@ -46,4 +49,3 @@ const args = [8, 5];
 // Math.atan2(...args); // compiled nicht
 const args2 = [8, 5] as const; // Inferred as 2-length tuple
 Math.atan2(...args2); // OK
-
