@@ -125,8 +125,6 @@
     }
     console.log({ 'Color.mixColor("cyan")': Color.mixColor("cyan") });
 
-    // Limit: Klassen können nicht mit Klassen (oder Variablen) gemerged werden. (=> Mixins mimicked class merging.)
-
 // Global augmentation: Man kann den globalen scope augmentieren / patchen.
     declare global {
       interface Array<T> {
@@ -155,3 +153,5 @@
         // import "./map";
         // let o: Observable<number>;
         // o.map((x) => x.toFixed());
+
+// Limit: Klassen können nicht mit Klassen (oder Variablen) gemerged werden. (=> Mixins mimicked class merging.)
