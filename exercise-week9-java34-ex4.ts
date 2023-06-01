@@ -46,7 +46,7 @@ declare global {
   function sleep(ms: number): Promise<void>;
 }
 async function sleep(ms: number) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
+  return new Promise<void>((resolve) => setTimeout(resolve, ms));
 }
 
 export {};
